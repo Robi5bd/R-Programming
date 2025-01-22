@@ -1,0 +1,196 @@
+
+# Title: Foundation of R Programming
+### Author: Md Rabiul Islam
+### Date: "`r Sys.Date()`"
+### Output: html_document
+### Download and Install R and RStudio
+
+- Download R: [CRAN R Project](https://cran.r-project.org/)
+- Download RStudio: [RStudio Desktop](https://posit.co/download/rstudio-desktop/)
+
+# Basic Data Types in R
+
+```{r}
+num_var <- 10.5  # Numeric
+print(num_var)
+
+int_var <- 10L  # Integer
+print(int_var)
+
+char_var <- "Hello, R!" # Character (String)
+print(char_var)
+
+bool_var <- TRUE # Logical (Boolean)
+print(bool_var)
+```
+
+# Arithmetic Operators
+
+```{r}
+a <- 10
+b <- 5
+print(a + b)  # Addition
+print(a - b)  # Subtraction
+print(a * b)  # Multiplication
+print(a / b)  # Division
+print(a %% b) # Modulus (remainder)
+print(a ^ b)  # Exponentiation
+```
+
+# Logical Operators
+
+```{r}
+x <- TRUE
+y <- FALSE
+print(x & y)  # AND
+print(x | y)  # OR
+print(!x)     # NOT
+```
+
+# Data Structures
+
+## Vectors (1D data structure)
+
+```{r}
+vec <- c(1, 2, 3, 4, 5)
+print(vec)
+print(vec[1])   # First element
+print(vec[2:4]) # Elements from index 2 to 4
+```
+
+## Matrix (2D data structure)
+
+```{r}
+mat <- matrix(1:12, nrow=4, ncol=3)
+print(mat)
+```
+
+## Data Frame
+
+```{r}
+df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 35),
+  Score = c(90, 85, 88)
+)
+print(df)
+print(df$Name)  # Access columns
+print(df[1,])   # First row
+```
+
+## Lists (Flexible heterogeneous data structure)
+
+```{r}
+my_list <- list(Name="Alice", Age=25, Scores=c(90, 85, 88))
+print(my_list)
+print(my_list$Name)  # Access elements
+print(my_list$Scores[1])  # First score
+```
+
+# Basic Programming Concepts
+
+## Conditional Statements (if, else)
+
+```{r}
+x <- 10
+if (x > 5) {
+  print("x is greater than 5")
+} else {
+  print("x is 5 or less")
+}
+```
+
+## For Loop
+
+```{r}
+for (i in 1:5) {
+  print(paste("Iteration:", i))
+}
+```
+
+## While Loop
+
+```{r}
+count <- 1
+while (count <= 5) {
+  print(paste("Count:", count))
+  count <- count + 1
+}
+```
+
+## Defining Functions
+
+```{r}
+add_numbers <- function(a, b) {
+  return(a + b)
+}
+print(add_numbers(5, 3))
+```
+
+# Data Manipulation
+
+```{r}
+#install.packages("dplyr")  # Install dplyr package
+library(dplyr)              # Load the package
+
+df <- data.frame(
+  Name = c("Alice", "Bob", "Charlie"),
+  Age = c(25, 30, 35),
+  Score = c(90, 85, 88)
+)
+
+# Select columns
+df_selected <- select(df, Name, Score)
+print(df_selected)
+
+# Filter rows
+df_filtered <- filter(df, Age > 25)
+print(df_filtered)
+
+# Arrange rows
+df_sorted <- arrange(df, desc(Score))
+print(df_sorted)
+
+# Add new column
+df_mutated <- mutate(df, Pass = Score >= 85)
+print(df_mutated)
+```
+
+# Data Importing and Cleaning
+
+## Reading and Writing CSV Files
+
+```{r}
+write.csv(df, "data.csv", row.names=FALSE) # Write CSV
+df_new <- read.csv("data.csv") # Read CSV
+print(df_new)
+```
+
+## Handling Missing Values
+
+```{r}
+df_missing <- data.frame(
+  Name = c("Alice", "Bob", NA),
+  Age = c(25, NA, 35),
+  Score = c(90, 85, NA)
+)
+
+# Check for missing values
+print(is.na(df_missing))
+
+# Remove missing values
+df_clean <- na.omit(df_missing)
+print(df_clean)
+
+# Replace missing values with mean
+df_missing$Age[is.na(df_missing$Age)] <- mean(df_missing$Age, na.rm=TRUE)
+print(df_missing)
+
+
+
+
+
+
+
+
+
